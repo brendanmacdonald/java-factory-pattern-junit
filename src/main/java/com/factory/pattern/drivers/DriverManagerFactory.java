@@ -2,12 +2,12 @@ package com.factory.pattern.drivers;
 
 public class DriverManagerFactory {
 
-    public enum DriverType {
-        CHROME,
-        FIREFOX,
-        IE,
-        SAFARI;
-    }
+//    public enum DriverType {
+//        CHROME,
+//        FIREFOX,
+//        IE,
+//        SAFARI;
+//    }
 
     public static DriverManager getManager(DriverType type) {
 
