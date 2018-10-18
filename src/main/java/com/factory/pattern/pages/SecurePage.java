@@ -2,6 +2,7 @@ package com.factory.pattern.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 public class SecurePage extends BasePage{
@@ -11,10 +12,11 @@ public class SecurePage extends BasePage{
     }
 
     @FindBy(className = "radius")
+    @CacheLookup
     private WebElement logoutBtn;
 
-    public LoginPage logout(){
+    public SecurePage logout(){
         logoutBtn.click();
-        return new LoginPage(driver);
+        return this;
     }
 }

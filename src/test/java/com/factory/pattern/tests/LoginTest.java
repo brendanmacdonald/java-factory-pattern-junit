@@ -39,7 +39,6 @@ public class LoginTest {
     @Test
     @DisplayName("Verify login page title")
     public void theInternetTest() {
-        System.out.println("***************test1");
         lp.openLoginPage();
         assertEquals("The Internet", lp.getPageTitle());
     }
@@ -47,7 +46,6 @@ public class LoginTest {
     @Test
     @DisplayName("Verify basic form authentication")
     public void formAuthenticationTest() {
-        System.out.println("***************test2");
         lp.openLoginPage();
         lp.setUsername("tomsmith");
         lp.setPassword("SuperSecretPassword!");

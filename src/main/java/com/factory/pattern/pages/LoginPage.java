@@ -2,6 +2,7 @@ package com.factory.pattern.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
@@ -17,25 +18,31 @@ public class LoginPage extends BasePage {
     public String getPageTitle() {
         return driver.getTitle();
     }
+
     @FindBy(id = "username")
+    @CacheLookup
     private WebElement username;
 
     @FindBy(id = "password")
+    @CacheLookup
     private WebElement password;
 
     @FindBy(className = "radius")
+    @CacheLookup
     private WebElement loginBtn;
 
-    public void setUsername(String username) {
+    public LoginPage setUsername(String username) {
         this.username.sendKeys(username);
+        return this;
     }
 
-    public void setPassword(String password) {
+    public LoginPage setPassword(String password) {
         this.password.sendKeys(password);
+        return this;
     }
 
-    public SecurePage submit(){
+    public LoginPage submit(){
         loginBtn.click();
-        return new SecurePage(driver);  // When you navigate you should return the a page object for the next page.
+        return this;  // When you navigate you should return the a page object for the next page.
     }
 }
