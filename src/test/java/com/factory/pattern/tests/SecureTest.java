@@ -7,10 +7,11 @@ import com.factory.pattern.drivers.DriverManagerFactory;
 import com.factory.pattern.drivers.DriverType;
 import com.factory.pattern.pages.LoginPage;
 import com.factory.pattern.pages.SecurePage;
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.CoreMatchers.containsString;
@@ -21,17 +22,14 @@ public class SecureTest {
     private static DriverManager driverManager;
     private static WebDriver driver;
     private static Configuration configParams = new Configuration();
-    private LoginPage lp = new LoginPage(driver);
+    private LoginPage lp = new LoginPage(driver, "tomsmith", "SuperSecretPassword!");
     private SecurePage sp = new SecurePage(driver);
 
     @BeforeClass
     public static void setUp() {
-        // Hard code to use Chrome
-        // driverManager = DriverManagerFactory.getManager(DriverType.CHROME);
-        // OR read in value from command line
         configParams = ConfigurationHelper.getCommandLineParams();
         DriverType driverType = configParams.getBrowser();
-        driverManager = DriverManagerFactory.getManager(driverType);
+        driverManager = DriverManagerFactory.getManager(driverType); // DriverManagerFactory.getManager(DriverType.CHROME);
         driver = driverManager.getDriver();
     }
 
@@ -41,12 +39,11 @@ public class SecureTest {
     }
 
     @Test
-    @DisplayName("Verify logout functionality")
+    @DisplayName("Human-readable test name")
+    @Description("Test Description: verify a user can logout.")
     public void verifyLogoutTest() {
         lp.openLoginPage();
-        lp.setUsername("tomsmith");
-        lp.setPassword("SuperSecretPassword!");
-        lp.submit();
+        lp.fillAndSubmit();
         sp.logout();
 
         assertThat(lp.getFlashText(), containsString("You logged out of the secure area!"));
