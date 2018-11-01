@@ -56,6 +56,6 @@ public class LoginTest {
         lp.openLoginPage();
         lp.fillAndSubmit("tomsmith", "SuperSecretPassword!");
 
-        assertThat(lp.getFlashText(), containsString("You logged into a secure area!1"));
+        assertThat(lp.getFlashText(), containsString("You logged into a secure area!"));
     }
 }
